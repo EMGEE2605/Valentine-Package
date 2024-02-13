@@ -60,15 +60,21 @@
 <script>
   function respond(answer) {
     if (answer === 'YES' || answer === 'NO') {
-      // Send email response
       var message;
       if (answer === 'YES') {
         message = "Congratulations, she decided to choose you over everyone else.";
       } else {
         message = "Uh oh, she decided to move with a better candidate. Better luck next time.";
       }
-      var emailResponse = "mailto:mosesgeorge2605@gmail.com?subject=Valentine's Day Response&body=" + encodeURIComponent(message);
-      window.location.href = emailResponse;
+      
+      // Create a new email message
+      var emailBody = encodeURIComponent(message);
+      var emailAddress = "mosesgeorge2605@gmail.com";
+      var subject = "Valentine's Day Response";
+      var emailLink = "mailto:" + emailAddress + "?subject=" + subject + "&body=" + emailBody;
+      
+      // Open the default email client
+      window.location.href = emailLink;
     }
   }
 </script>
