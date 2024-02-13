@@ -14,92 +14,58 @@
     height: 100vh;
     margin: 0;
   }
-  .container {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  h2 {
-    font-weight: 900;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  .options-container {
+  .email-card {
+    width: 300px;
+    height: 200px;
+    background-color: #fff; /* White background */
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow */
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-  }
-  .box {
-    margin: 0 10px;
-    padding: 15px 30px;
-    border: 2px solid #ff3333; /* Red border */
-    border-radius: 50px;
+    align-items: center;
     cursor: pointer;
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    transition: all 0.3s ease;
+    animation: bounce 1s infinite alternate; /* Bouncing animation */
   }
-  .box:hover {
-    background-color: #ffcccc; /* Light red background on hover */
-    border-color: #ff6666; /* Darker red border on hover */
-    color: #ff6666; /* Darker red text color on hover */
+  .email-card:hover {
+    animation: none; /* Stop bouncing on hover */
+  }
+  .email-content {
+    display: none;
+    text-align: center;
+  }
+  .email-card.open .email-content {
+    display: block;
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <h2><b>Please Do Me The Honour Of Being My Valentine</b></h2>
-  <div class="options-container">
-    <div class="box" onclick="respond('YES')">YES</div>
-    <div class="box" onclick="respond('NO')">NO</div>
+
+<div class="email-card" onclick="toggleEmail()">
+  <div class="email-content">
+    <p>Please Do Me The Honour Of Being My Valentine</p>
   </div>
 </div>
 
-<!-- Add this HTML element for displaying the success message -->
-<div id="success-message" style="display: none;">Your response has been sent successfully!</div>
-
 <script>
-  function respond(answer) {
-    if (answer === 'YES' || answer === 'NO') {
-      var message;
-      if (answer === 'YES') {
-        message = "Congratulations, she decided to choose you over everyone else.";
-      } else {
-        message = "Uh oh, she decided to move with a better candidate. Better luck next time.";
-      }
-
-      // Send email via server
-      fetch('/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          emailAddress: 'mosesgeorge2605@gmail.com',
-          subject: "Valentine's Day Response",
-          message: message
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Email sent successfully');
-          // Show success message to the user
-          document.getElementById('success-message').style.display = 'block';
-        } else {
-          console.error('Error sending email');
-          // Optionally, display a message to the user indicating failure
-        }
-      })
-      .catch(error => {
-        console.error('Error sending email:', error);
-        // Optionally, display a message to the user indicating failure
-      });
-    }
+  function toggleEmail() {
+    var emailCard = document.querySelector('.email-card');
+    emailCard.classList.toggle('open');
   }
 </script>
 
+<script>
+  function respond(answer) {
+    var message;
+    if (answer === 'YES') {
+      message = "Thank you for accepting to be my Valentine! This choice comes with a weekend date starting off with a Dinner date at a restaurant of your choice and an arcade date at Rufus and Bee.";
+    } else {
+      message = "Thank you for being honest, I hope to get a YES next year.";
+    }
+
+    // Display message
+    alert(message);
+  }
+</script>
 
 </body>
 </html>
