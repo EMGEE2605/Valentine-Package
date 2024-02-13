@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day Proposal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8e7e7; /* Light pink background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  h2 {
+    font-weight: 900;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .options-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .box {
+    margin: 0 10px;
+    padding: 15px 30px;
+    border: 2px solid #ff3333; /* Red border */
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  .box:hover {
+    background-color: #ffcccc; /* Light red background on hover */
+    border-color: #ff6666; /* Darker red border on hover */
+    color: #ff6666; /* Darker red text color on hover */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2><b>Please Do Me The Honour Of Being My Valentine</b></h2>
+  <div class="options-container">
+    <div class="box" onclick="respond('YES')">YES</div>
+    <div class="box" onclick="respond('NO')">NO</div>
+  </div>
+</div>
+
+<script>
+  function respond(answer) {
+    if (answer === 'YES' || answer === 'NO') {
+      // Send email response
+      var message;
+      if (answer === 'YES') {
+        message = "Congratulations, she decided to choose you over everyone else.";
+      } else {
+        message = "Uh oh, she decided to move with a better candidate. Better luck next time.";
+      }
+      var emailResponse = "mailto:mosesgeorge2605@gmail.com?subject=Valentine's Day Response&body=" + encodeURIComponent(message);
+      window.location.href = emailResponse;
+    }
+  }
+</script>
+</body>
+</html>
