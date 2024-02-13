@@ -66,17 +66,35 @@
       } else {
         message = "Uh oh, she decided to move with a better candidate. Better luck next time.";
       }
-      
-      // Create a new email message
-      var emailBody = encodeURIComponent(message);
-      var emailAddress = "mosesgeorge2605@gmail.com";
-      var subject = "Valentine's Day Response";
-      var emailLink = "mailto:" + emailAddress + "?subject=" + subject + "&body=" + emailBody;
-      
-      // Open the default email client
-      window.location.href = emailLink;
+
+      // Send email via server
+      fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          emailAddress: 'mosesgeorge2605@gmail.com',
+          subject: "Valentine's Day Response",
+          message: message
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Email sent successfully');
+          // Optionally, display a message to the user indicating success
+        } else {
+          console.error('Error sending email');
+          // Optionally, display a message to the user indicating failure
+        }
+      })
+      .catch(error => {
+        console.error('Error sending email:', error);
+        // Optionally, display a message to the user indicating failure
+      });
     }
   }
 </script>
+
 </body>
 </html>
