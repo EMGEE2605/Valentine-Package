@@ -102,7 +102,19 @@
     if (answer === 'YES') {
       message = "<p>Thank you for accepting to be my Valentine!</p><p>This choice comes with a weekend date starting off with a Dinner date at a restaurant of your choice and an arcade date at Rufus and Bee.</p>";
     } else {
-      message = "Thank you for being honest, I hope to get a YES next year!";
+      var responses = [
+        "Thank God I didn't have to spend money on a gift this year.",
+        "Thank you for helping me save money on Valentine's Day.",
+        "Like I didn't already know you would choose NO.",
+        "Now I know I've been dating myself all along.",
+        "Dodged a bullet there, huh?",
+        "Phew, saved myself from heartbreak.",
+        "Guess I'll treat myself to a solo spa day instead.",
+        "Well, more chocolate for me, I guess.",
+        "Time to binge-watch my favorite shows without interruption.",
+        "Who needs a Valentine when I have my Netflix subscription?"
+      ];
+      message = responses[Math.floor(Math.random() * responses.length)];
     }
     // Show modal with success message
     showModal(message);
