@@ -47,51 +47,40 @@
     border-color: #ff6666; /* Darker red border on hover */
     color: #ff6666; /* Darker red text color on hover */
   }
-  .email-card {
-    width: 200px;
-    height: 200px;
-    background-color: #fff; /* White background */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    animation: bounce 1s infinite alternate; /* Bouncing animation */
-    position: relative;
-    margin-bottom: 20px;
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  .email-card:hover {
-    animation: none; /* Stop bouncing on hover */
-  }
-  .email-content {
-    display: none;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
     padding: 20px;
-    background-color: #f9f9f9; /* Light gray background */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow */
-    z-index: 1000;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
   }
-  .email-card.open .email-content {
-    display: block;
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="email-card" onclick="toggleEmail()">
-    <img src="https://image.flaticon.com/icons/png/512/64/64572.png" alt="Email Letter" width="100" height="100">
-    <div class="email-content">
-      <p>Thank you for accepting to be my Valentine!</p>
-      <p>This choice comes with a weekend date starting off with a Dinner date at a restaurant of your choice and an arcade date at Rufus and Bee.</p>
-    </div>
-  </div>
   <h2><b>Please Do Me The Honour Of Being My Valentine</b></h2>
   <div class="options-container">
     <div class="box" onclick="respond('YES')">YES</div>
@@ -99,22 +88,36 @@
   </div>
 </div>
 
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="successMessage"></div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-  function toggleEmail() {
-    var emailCard = document.querySelector('.email-card');
-    emailCard.classList.toggle('open');
-  }
   function respond(answer) {
     var message;
     if (answer === 'YES') {
-      message = "Congratulations, she decided to choose you over everyone else!";
+      message = "<p>Thank you for accepting to be my Valentine!</p><p>This choice comes with a weekend date starting off with a Dinner date at a restaurant of your choice and an arcade date at Rufus and Bee.</p>";
     } else {
-      message = "Uh oh, she decided to move with a better candidate. Better luck next time!";
+      message = "Thank you for being honest, I hope to get a YES next year!";
     }
-    // Show toast notification
-    toastr.success(message);
+    // Show modal with success message
+    showModal(message);
+  }
+
+  function showModal(message) {
+    var modal = document.getElementById("successModal");
+    var successMessage = document.getElementById("successMessage");
+    successMessage.innerHTML = message;
+    modal.style.display = "block";
+  }
+
+  function closeModal() {
+    var modal = document.getElementById("successModal");
+    modal.style.display = "none";
   }
 </script>
 </body>
