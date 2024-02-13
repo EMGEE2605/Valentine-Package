@@ -57,6 +57,9 @@
   </div>
 </div>
 
+<!-- Add this HTML element for displaying the success message -->
+<div id="success-message" style="display: none;">Your response has been sent successfully!</div>
+
 <script>
   function respond(answer) {
     if (answer === 'YES' || answer === 'NO') {
@@ -82,7 +85,8 @@
       .then(response => {
         if (response.ok) {
           console.log('Email sent successfully');
-          // Optionally, display a message to the user indicating success
+          // Show success message to the user
+          document.getElementById('success-message').style.display = 'block';
         } else {
           console.error('Error sending email');
           // Optionally, display a message to the user indicating failure
@@ -95,6 +99,7 @@
     }
   }
 </script>
+
 
 </body>
 </html>
