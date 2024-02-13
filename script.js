@@ -27,8 +27,8 @@ app.post('/send-email', (req, res) => {
   // Define email options
   const mailOptions = {
     from: 'mosesgeorge260805@gmail.com',
-    to: 'moosesgeorge2605@gmail.com',
-    subject: Her Response,
+    to: emailAddress,
+    subject: subject,
     text: message
   };
 
